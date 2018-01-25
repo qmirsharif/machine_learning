@@ -7,10 +7,12 @@ import matplotlib.pyplot as plt
 #let's load digits data
 
 digits = datasets.load_digits()
-
+# print(digits.target.shape)
+# print(digits.images.shape)
+# exit()
 n_samples = len(digits.images)
-data = digits.images.reshape((n_samples, -1))
-train_data = data[:n_samples//2]
+data = digits.images.reshape((n_samples, -1)) #reshape data - flatten images to input to classifire
+train_data = data[:n_samples//2] # take 50% of data for training
 test_data = data[n_samples//2:]
 y_train = digits.target[:n_samples//2]
 y_test = digits.target[n_samples//2:]
@@ -32,10 +34,13 @@ predicted = classifier.predict(test_data)
 print("Classification report for classifier %s:\n%s\n"
       % (classifier, metrics.classification_report(y_test, predicted)))
 
+#how to save a trained model and load it later
+
 # import pickle
 # s = pickle.dumps(classifier)
 # model = pickle.loads(s)
-# print("testing on data")
+# print("Reloading the model for prediction")
+# print(test_data.shape)
 # predictions = model.predict(test_data)
 # print("Classification report after reloading the model %s:\n%s\n"
 #       % (classifier, metrics.classification_report(y_test, predictions)))
